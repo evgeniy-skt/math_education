@@ -7,13 +7,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Greeting
-        run: |
-          echo "Hello, world"
+      - name: Checkout
+        uses: actions/checkout@v2
           
-      - name: Goodbye
+      - name: Compile
         run: |
-          echo "Goodbye, world"
+          scripts/compile.sh
           
   my-second-job:
     name: My second job
