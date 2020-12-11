@@ -8,17 +8,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
-      - name: Debug
-        run: |
-          ls -al script
 
       - name: Create output directory
         run: |
           mkdir out
       - name: Compile
         run: |
-          script/compile.sh > out/code.compiled
+          scripts/compile.sh > out/code.compiled
       - name: Upload compiled code
         uses: actions/upload-artifact@v2
         with:
@@ -35,9 +31,16 @@ jobs:
         with:
           name: compiled
           path: .
-          
+
       - name: Hello, world
         run: |
           echo "Hello, $WHO_TO_GREET"
-        env: 
-          NAME: ${{secrets.NAME}}
+        env:
+          WHO_TO_GREET: ${{ secrets.NAME }}
+
+      - name: Slack notify
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: This is my notification
+          SLACK_MESSAGE: Hello from Dima
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
