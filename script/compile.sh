@@ -1,0 +1,1 @@
+grep -v 'a' code.tt
