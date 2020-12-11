@@ -1,9 +1,9 @@
-name: My dirst forkflow
+name: My first forkflow
 on: push
 
 jobs:
   my-first-job:
-    name: Lint code base
+    name: My first forkflow
     runs-on: ubuntu-latest
 
     steps:
