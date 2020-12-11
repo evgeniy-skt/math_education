@@ -1,1 +1,1 @@
-grep -v 'a' code.tt
+grep -v 'a' src/code.tt
