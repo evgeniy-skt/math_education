@@ -1,22 +1,24 @@
 name: My first workflow
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Person to greet"
+        required: true
+        default: "Mona the Octocat"
+      home:
+        description: "location"
+        required: false
+        default: "The Octoverse"
 
 jobs:
-
-  analyze_job:
-    name: Analyze job
+  compile_job:
+    name: Compile job
     runs-on: ubuntu-latest
     steps:
-      - name: Hello, world
-        run: |
-          echo "Hello, $WHO_TO_GREET"
-        env:
-          WHO_TO_GREET: ${{ secrets.NAME }}
-
       - name: Slack notify
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: This is my notification
-          
-          SLACK_MESSAGE: Hello from Evgeniy
+          SLACK_MESSAGE: Hello ${{ github.event.inputs.name }} in ${{ github.event.inputs.home }}!
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
