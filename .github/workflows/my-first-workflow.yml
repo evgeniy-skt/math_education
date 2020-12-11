@@ -38,6 +38,6 @@ jobs:
           
       - name: Hello, world
         run: |
-          echo "Hello, $NAME"
+          echo "Hello, $WHO_TO_GREET"
         env: 
-          NAME: "Evgeniy"
+          NAME: ${{secrets.NAME}}
