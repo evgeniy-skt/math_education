@@ -2,36 +2,11 @@ name: My first workflow
 on: push
 
 jobs:
-  compile_job:
-    name: Compile job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Create output directory
-        run: |
-          mkdir out
-      - name: Compile
-        run: |
-          scripts/compile.sh > out/code.compiled
-      - name: Upload compiled code
-        uses: actions/upload-artifact@v2
-        with:
-          name: compiled
-          path: out/code.compiled
 
   analyze_job:
     name: Analyze job
-    needs: compile_job
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: compiled
-          path: .
-
       - name: Hello, world
         run: |
           echo "Hello, $WHO_TO_GREET"
