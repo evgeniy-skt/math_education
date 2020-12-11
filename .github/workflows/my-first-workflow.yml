@@ -14,7 +14,7 @@ jobs:
           mkdir out
       - name: Compile
         run: |
-          scripts/compile.sh > out/code.compiled
+          script/compile.sh > out/code.compiled
       - name: Upload compiled code
         uses: actions/upload-artifact@v2
         with:
