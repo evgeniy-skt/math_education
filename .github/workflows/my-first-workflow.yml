@@ -1,24 +1,30 @@
-name: My first forkflow
+name: My first workflow
 on: push
 
 jobs:
-  my-first-job:
-    name: My first job
+  my_first_job:
+    name: Compile job
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-          
+
+      - name: Create output directory
+        run: |
+          mkdir out
       - name: Compile
         run: |
-          scripts/compile.sh
-          
-  my-second-job:
+          scripts/compile.sh > out/code.compiled
+      - name: Upload compiled code
+        uses: actions/upload-artifact@v2
+        with:
+          name: compiled
+          path: out/code.compiled
+
+  my_second_job:
     name: My second job
     runs-on: ubuntu-latest
-
     steps:
-      - name: Greeting
+      - name: Greeting from second job
         run: |
-          echo "Hello, world from second job"
+          echo "Hello, world from 2nd job"
